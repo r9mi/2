@@ -1,0 +1,167 @@
+<html>
+<head>
+<script src="jquery-1.12.1.min.js"></script>
+<link href="bootstrap.min.css" rel="stylesheet">
+<title>
+	Form Validation
+</title>
+<style>
+	h6{
+		color:red;
+	}
+</style>
+</head>
+<body style="background-color:black; color:white;">
+<center>
+	<div class="container">
+	<h1 class="text-center">Form Validation</h1>
+	<form>
+		<div class="form-group">
+			<label>
+				Username
+			</label>
+			<input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">
+			<h6 id="usercheck">**Username Missing</h6>
+		</div>
+		
+		<div class="form-group">
+			<label>
+				Email
+			</label>
+			<input type="email" name="email" id="email" class="form-control" placeholder="Enter Email">
+			<h6 id="emailcheck">**Email Missing</h6>
+		</div>
+		
+		<div class="form-group">
+			<label>
+				Password
+			</label>
+			<input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">
+			<h6 id="passcheck">**Invalid Password </h6>
+		</div>
+		
+		<div class="form-group">
+			<label>
+				Confirm Password
+			</label>
+			<input type="password" name="compassword" id="compassword" class="form-control" placeholder="Enter Password As Above">
+			<h6 id="compasscheck">**Invalid Password</h6>
+		</div>
+		
+		<button type="submit" class="btn btn-warning">Submit</button>
+	</form>
+	</div>
+	<script>
+		$(document).ready(function()
+		{
+			$("#usercheck").hide();
+			$("#username").keyup(function()
+			{
+				validateuser();
+			});
+			
+			function validateuser()
+			{
+				let user=$("#username").val();
+				if(user.length == "")
+				{
+					$("#usercheck").show();
+					$("#usercheck").html("Username missing");
+					return false;
+				}
+				else if(user.length<3 || user.length>10)
+				{
+					$("#usercheck").show();
+					$("#usercheck").html("**Username must between 3to10 cherecter");
+					return false;
+				}
+				else
+				{
+					$("#usercheck").hide();
+				}
+				
+			}
+			
+			$("#emailcheck").hide();
+			$("#email").keyup(function()
+			{
+				validateemail();
+			});
+			
+			function validateemail()
+			{
+				let emailc=$("#email").val();
+				if(emailc.length == "")
+				{
+					$("#emailcheck").show();
+					$("#emailcheck").html("**Email missing");
+					return false;
+				}
+				else
+				{
+					$("#usercheck").hide();
+				}
+				
+			}
+			
+			
+			$("#passcheck").hide();
+			$("#password").keyup(function()
+			{
+				validatepass();
+			});
+			
+			function validatepass()
+			{
+				let pass=$("#password").val();
+				if(pass.length == "")
+				{
+					$("#passcheck").show();
+					$("#passcheck").html("Password missing");
+					return false;
+				}
+				else if(pass.length<3 || pass.length>10)
+				{
+					$("#passcheck").show();
+					$("#passcheck").html("**Password must between 3to10 cherecter");
+					return false;
+				}
+				else
+				{
+					$("#passcheck").hide();
+				}
+				
+			}
+			
+			$("#compasscheck").hide();
+			$("#compassword").keyup(function()
+			{
+			
+				validateconpass();
+			});
+			
+			function validateconpass() {
+				let compass = $("#compassword").val();
+				let pass = $("#password").val();
+				if(compass == "") {
+					$("#compasscheck").show();
+					return false;
+				}
+				else if(compass!=pass) 
+				{
+					$("#compasscheck").show();
+					$("#compasscheck").html("*password not match");
+					return false;
+				}
+				else{
+					$("#compasscheck").hide();
+				}
+			}
+			
+			
+			
+		})
+	</script>
+	</center>
+</body>
+</html>
